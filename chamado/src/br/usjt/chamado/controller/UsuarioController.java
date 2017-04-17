@@ -53,18 +53,22 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/novo")
-	public String addUsuario(Model model) {
+	public String addUsuario(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("usuario",new Usuario());
 		model.addAttribute("filas",serviceFila.listar());
 		model.addAttribute("slas",serviceSLA.listar());
+		model.addAttribute("login", usuario);
 		return "usuario/crud";
 	}
 
 	@RequestMapping(value="/edit/{id}",method = RequestMethod.GET)
-	public String editUsuario(Model model, @PathVariable("id") Long id) {
+	public String editUsuario(Model model, @PathVariable("id") Long id, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("usuario",serviceUsuario.buscaPorId(id));
 		model.addAttribute("filas",serviceFila.listar());
 		model.addAttribute("slas",serviceSLA.listar());
+		model.addAttribute("login", usuario);
 		return "usuario/crud";
 	}
 

@@ -36,6 +36,7 @@ public class UsuarioService {
 	}
 	
 	public void alterar(Usuario usuario, HttpSession session) {
+		Usuario usuarioOld = buscaPorId(usuario.getId());
 		Usuario login = (Usuario) session.getAttribute("usuarioLogado");
 		if (usuario.equals(login)) {
 			session.setAttribute("usuarioLogado", usuario);
@@ -43,13 +44,15 @@ public class UsuarioService {
 		
 		if (usuario.getTipoUsuario() == TipoUsuario.ADMINISTRADOR) {
 			usuario.setFila(null);
-			usuario.setSla(null);;
+			usuario.setSla(null);
 		}
 		if (usuario.getTipoUsuario() == TipoUsuario.SOLUCIONADOR) {
-			usuario.setSla(null);;
+			usuario.setSla(null);
+			usuario.setAtivo(usuarioOld.getAtivo());
 		}
 		if (usuario.getTipoUsuario() == TipoUsuario.SOLICITANTE) {
-			usuario.setFila(null);;
+			usuario.setFila(null);
+			usuario.setAtivo(usuarioOld.getAtivo());
 		}
 		daoUsuario.alterar(usuario);
 	}

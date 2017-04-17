@@ -65,14 +65,17 @@ public class ChamadoController {
 			idSla = usuario.getSla().getId();
 		}
 		model.addAttribute("slas",serviceSLA.listarUsuario(idSla));
+		model.addAttribute("login", usuario);
 		return "chamado/crud";
 	}
 
 	@RequestMapping(value="/edit/{id}",method = RequestMethod.GET)
-	public String editChamado(Model model, @PathVariable("id") Long id) {
+	public String editChamado(Model model, @PathVariable("id") Long id, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("chamado",serviceChamado.buscaPorId(id));
 		model.addAttribute("filas",serviceFila.listar());
 		model.addAttribute("slas",serviceSLA.listar());
+		model.addAttribute("login", usuario);
 		return "chamado/crud";
 	}
 

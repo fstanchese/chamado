@@ -92,12 +92,12 @@ public class Chamado implements Serializable {
 	@Column(name = "ativo", length = 1, nullable = false)    
 	private Integer ativo;
 	
-	transient Long prazo;
+	transient String prazo;
 	
-	public void setPrazo(Long prazo) {
+	public void setPrazo(String prazo) {
 		this.prazo = prazo;
 	}
-	public Long getPrazo() {
+	public String getPrazo() {
 		return prazo;
 	}
 	public Long getId() {

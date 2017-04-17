@@ -37,7 +37,6 @@ public class ChamadoDAO {
 	@SuppressWarnings("unchecked")
 	public List<Chamado> listarSolucionador(Usuario usuario) {
 		List<Chamado> lista = null;
-		System.out.println("pqp"+usuario.toString());
 		if(usuario.getTipoUsuario() == TipoUsuario.SOLICITANTE ) {
 			lista = manager.createNamedQuery("Chamado.listarSolicitante")
 					.setParameter("solicitante", usuario)

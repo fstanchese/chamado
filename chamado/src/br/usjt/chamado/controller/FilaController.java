@@ -45,16 +45,20 @@ public class FilaController {
 	}
 	
 	@RequestMapping(value="/novo")
-	public String addFila(Model model) {
+	public String addFila(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("gerentes",serviceUsuario.listarSolucionador());
 		model.addAttribute("fila",new Fila());
+		model.addAttribute("login", usuario);
 		return "fila/crud";
 	}
 
 	@RequestMapping(value="/edit/{id}",method = RequestMethod.GET)
-	public String editFila(Model model, @PathVariable("id") Long id) {
+	public String editFila(Model model, @PathVariable("id") Long id, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("fila",serviceFila.buscaPorId(id));
 		model.addAttribute("gerentes",serviceUsuario.listarSolucionador());
+		model.addAttribute("login", usuario);
 		return "fila/crud";
 	}
 
