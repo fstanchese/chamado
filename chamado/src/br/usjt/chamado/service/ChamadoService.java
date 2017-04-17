@@ -32,7 +32,8 @@ public class ChamadoService {
 		chamado.setDtCadastro(new Date());
 		chamado.setDtLimite(limite.getTime());
 		chamado.setStatus(Status.ABERTO);
-		
+		if (chamado.getAtivo() == null)
+			chamado.setAtivo(1);
 		daoChamado.adicionar(chamado);
 	}
 	
