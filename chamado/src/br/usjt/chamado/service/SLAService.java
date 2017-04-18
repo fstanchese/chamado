@@ -1,5 +1,10 @@
 package br.usjt.chamado.service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +38,42 @@ public class SLAService {
 	public List<SLA> listarUsuario(Long id) {
 		// TODO Auto-generated method stub
 		return daoSLA.buscaPorUsuario(id);
+	}
+	
+	public String calculaPrazo(Date dtLimite) {
+        LocalDateTime hoje = LocalDateTime.now();
+        LocalDateTime limite;
+        Instant instant;
+        String dias = "",horas = "",minutos = "";
+        
+		instant = Instant.ofEpochMilli(dtLimite.getTime());
+		limite = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        long diferencaEmMinutos = Math.abs(ChronoUnit.MINUTES.between(hoje, limite));
+        long diferencaEmHours = Math.abs(ChronoUnit.HOURS.between(hoje, limite));
+        long diferencaEmDias = Math.abs(ChronoUnit.DAYS.between(hoje, limite));	
+        
+        if (diferencaEmHours == 24) diferencaEmHours = 0;
+        
+        if (diferencaEmDias > 0) {
+           dias = diferencaEmDias + " dia(s) ";
+        } 
+        if (diferencaEmHours > 0) {
+           horas = + diferencaEmHours%60 + " hora(s) ";
+        } 
+        if (diferencaEmMinutos > 0) {
+           minutos = diferencaEmMinutos%60 + " minuto(s) ";
+        }
+        return dias + horas + minutos;
+	}
+	
+	public boolean estaAtrasado(Date dtLimite) {
+        LocalDateTime hoje = LocalDateTime.now();
+        LocalDateTime limite;
+        Instant instant;		
+		instant = Instant.ofEpochMilli(dtLimite.getTime());
+		limite = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        long diferencaEmMinutos = ChronoUnit.MINUTES.between(hoje, limite);    
+        
+        return diferencaEmMinutos < 0;
 	}
 }
