@@ -9,6 +9,13 @@
 	@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
 	@IMPORT url("${path}/resources/css/custom.css");
 	@IMPORT url("${path}/resources/css/style.css");
+		body{
+	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+	}
+	section{
+	  margin: 50px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Chamado</title>
@@ -24,9 +31,9 @@
 		<form:form commandName="chamado" class="form-horizontal" action="${path}/chamados/crudChamado" method="post">
 		<form:input path="id" type="hidden" value="${chamado.id}"/>
 		
-		<div class="panel panel-info">
-   			<div class="panel-heading">
-   				<div class="clearfix">
+		<div class="panel panel-group">
+     		<div class="panel panel-primary">
+   				<div class="panel-heading">
    					<c:if test="${not empty chamado.id}">
 	   					<strong>Alterar Chamado</strong>
 					</c:if>
@@ -35,7 +42,6 @@
 					</c:if>  					
    				</div>
    			</div>
-   			<br>
 			<div class="panel-body">
 			
 				<div class="row top-buffer">
@@ -52,16 +58,16 @@
 					</div>
 					
 					<div class="col-sm-4">
-					<label for="sla">SLA Chamado</label>
-                    <form:select path="sla" class="form-control" name="sla">
-					<c:forEach var="sla" items="${slas}">
-						<option value="${sla.id}"
-							${sla.id==chamado.sla.id ? 'selected' : ''}>${sla.descricao}
-						</option>
-					</c:forEach>
-					</form:select>
-					<form:errors path="sla" cssClass="error" />
-				</div>
+						<label for="sla">SLA Chamado</label>
+                    	<form:select path="sla" class="form-control" name="sla">
+						<c:forEach var="sla" items="${slas}">
+							<option value="${sla.id}"
+								${sla.id==chamado.sla.id ? 'selected' : ''}>${sla.descricao}
+							</option>
+						</c:forEach>
+						</form:select>
+						<form:errors path="sla" cssClass="error" />
+					</div>
 				</div>
 
 				<div class="row top-buffer">
@@ -80,8 +86,8 @@
 				</div>
 				</div>
 						
-				<div class="row top-buffer">
 				<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+				<div class="row top-buffer">
 					<div class="col-sm-4">
 		                <label for="ativo">Ativo</label>
 	                    <form:select path="ativo" class="form-control" name="ativo">
@@ -89,8 +95,8 @@
 	                        <form:option value="0" label="Não"/>
 	                    </form:select>
 		            </div>
-				</c:if>	
 				</div>
+				</c:if>	
 				
 				<div class="row top-buffer">
 				<div class="col-sm-12">

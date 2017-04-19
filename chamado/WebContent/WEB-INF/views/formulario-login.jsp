@@ -25,6 +25,13 @@
 			#btn-login{
 				width: 100%;
 			}
+			body{
+			  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+			  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+			}
+			section{
+			  margin: 50px;
+			}
 		</style>
 	</head>
 	<body>

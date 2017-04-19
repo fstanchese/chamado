@@ -10,7 +10,15 @@
 	@IMPORT url("${path}/resources/css/custom.css");
 	@IMPORT url("${path}/resources/css/style.css");
 	@IMPORT url("${path}/resources/css/zebra.dialog.css");
-	
+
+body{
+  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+}
+section{
+  margin: 50px;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Cadastro de Chamados</title>
@@ -20,21 +28,23 @@
 		<c:import url="..\cabecalho.jsp" />
 		<div class="panel panel-group">
    		<div class="panel panel-primary">
- 			<div>Ola, ${login.nome} você é um ${login.tipoUsuario} ${login.fila.descricao}</div>
    			<div class="panel-heading">
 				<a href="${path}/chamados/novo" class="btn btn-info" role="button">Novo Chamado</a>
    			</div>
 			<c:if test="${not empty chamados}">
-				<table class="table table-hover table-condensed  table-bordered">
+				<table class="table table-hover table-condensed table-striped table-bordered">
 				<thead>
 					<tr>
 						<th align=center>Solicitante</th>
 						<th align=center>Fila</th>
-						<th align=center>Cadastro</th>
-						<th align=center>Limite</th>
-						<th align=center>Prazo</th>
+						<th align=center>Dt Inicio Prazo</th>
+						<th align=center>Dt Limite Prazo</th>
+						<th align=center>Tempo Restante</th>
 						<th align=center>Status</th>
 						<th align=center>Assunto</th>
+						<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+							<th align=center>Ativo</th>
+						</c:if>
 						<th width="12%">&nbsp;&nbsp;Ação</th>
 					</tr>
 				</thead>
@@ -43,13 +53,26 @@
 						<tr>
 							<td>&nbsp;${chamado.solicitante.nome}</td>
 							<td>&nbsp;${chamado.fila.descricao}</td>
-							<td><fmt:formatDate value="${chamado.dtCadastro}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+							<c:if test="${empty chamado.dtAlteracao}">
+								<td><fmt:formatDate value="${chamado.dtCadastro}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+							</c:if>
+							<c:if test="${not empty chamado.dtAlteracao}">
+								<td><fmt:formatDate value="${chamado.dtAlteracao}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+							</c:if>							
 							<td><fmt:formatDate value="${chamado.dtLimite}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
 							<td>&nbsp;${chamado.prazo}</td>
 							<td>&nbsp;${chamado.status}</td>
 							<td>&nbsp;${chamado.assunto}</td>
+							<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+								<td>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
+							</c:if>
 							<td width="3%">
-								<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
+								<c:if test="${chamado.status eq 'ABERTO'}">
+									<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
+								</c:if>
+								<c:if test="${login.tipoUsuario ne 'SOLICITANTE'}">
+									<a href="${path}/chamados/atender/${chamado.id}" class="btn btn-info btn-xs" role="button">Atender</a>
+								</c:if>							
 							</td>
 						</tr>
 					</c:forEach>

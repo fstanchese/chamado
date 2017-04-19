@@ -9,6 +9,13 @@
 	@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
 	@IMPORT url("${path}/resources/css/custom.css");
 	@IMPORT url("${path}/resources/css/style.css");
+	body{
+	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+	}
+	section{
+	  margin: 50px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Usuário</title>
@@ -24,9 +31,9 @@
 		<form:form commandName="usuario" class="form-horizontal" action="${path}/usuarios/crudUsuario" method="post">
 		<form:input path="id" type="hidden" value="${usuario.id}"/>
 		
-		<div class="panel panel-info">
-   			<div class="panel-heading">
-   				<div class="clearfix">
+		<div class="panel panel-group">
+     		<div class="panel panel-primary">
+   				<div class="panel-heading">
    					<c:if test="${not empty usuario.id}">
 	   					<strong>Alterar Usuário</strong>
 					</c:if>
@@ -35,7 +42,6 @@
 					</c:if>  					
    				</div>
    			</div>
-   			<br>
 			<div class="panel-body">
 				<div class="row top-buffer">
 				<div class="col-sm-12">

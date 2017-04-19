@@ -85,6 +85,22 @@ public class ChamadoController {
 		return "chamado/crud";
 	}
 
+	@RequestMapping(value="/atender/{id}",method = RequestMethod.GET)
+	public String atendeChamado(Model model, @PathVariable("id") Long id, HttpSession session) {
+		Long idSla = null;
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		model.addAttribute("chamado",serviceChamado.buscaPorId(id));
+		model.addAttribute("filas",serviceFila.listar());
+		if(usuario.getSla() == null)
+			idSla = 1L;
+		else {
+			idSla = usuario.getSla().getId();
+		}
+		model.addAttribute("slas",serviceSLA.listarUsuario(idSla));
+		model.addAttribute("login", usuario);
+		return "chamado/atende";
+	}
+	
 	@RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
 	public String deleteChamado(Model model, @PathVariable("id") Long id, HttpSession session) {
 		Chamado chamado = serviceChamado.buscaPorId(id);

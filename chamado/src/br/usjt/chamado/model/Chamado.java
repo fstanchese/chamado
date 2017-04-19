@@ -56,6 +56,10 @@ public class Chamado implements Serializable {
 	private Date dtCadastro;
 	
 	@Temporal(value=TemporalType.TIMESTAMP)
+	@Column(name="dtalteracao", nullable = true)
+	private Date dtAlteracao;
+	
+	@Temporal(value=TemporalType.TIMESTAMP)
 	@Column(name="dtlimite", nullable = true)
 	private Date dtLimite;
 	
@@ -204,6 +208,14 @@ public class Chamado implements Serializable {
 		this.ativo = ativo;
 	}
 
+	public Date getDtAlteracao() {
+		return dtAlteracao;
+	}
+	
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

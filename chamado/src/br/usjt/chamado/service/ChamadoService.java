@@ -36,6 +36,9 @@ public class ChamadoService {
 	}
 	
 	public void alterar(Chamado chamado) {
+		Calendar limite = Calendar.getInstance();
+		limite.add(Calendar.HOUR,chamado.getSla().getSLATempo());
+		
 		Chamado chamadolOld = buscaPorId(chamado.getId());
 		chamado.setDtCadastro(chamadolOld.getDtCadastro());
 		chamado.setDtLimite(chamadolOld.getDtLimite());
@@ -43,8 +46,16 @@ public class ChamadoService {
 		chamado.setDtInicioAtendimento(chamadolOld.getDtInicioAtendimento());
 		chamado.setStatus(chamadolOld.getStatus());
 		chamado.setSolicitante(chamadolOld.getSolicitante());
-		if (chamado.getAtivo() == null)
+		chamado.setDtAlteracao(chamadolOld.getDtAlteracao());
+		if (chamado.getAtivo() == null) {
 			chamado.setAtivo(chamadolOld.getAtivo());
+		}
+		
+		if (chamado.getSla().getId() != chamadolOld.getSla().getId()) {
+			chamado.setDtLimite(limite.getTime());
+			chamado.setDtAlteracao(new Date());
+		}
+
 		daoChamado.alterar(chamado);
 	}
 	

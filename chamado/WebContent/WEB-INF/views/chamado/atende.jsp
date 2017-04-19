@@ -9,7 +9,7 @@
 	@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
 	@IMPORT url("${path}/resources/css/custom.css");
 	@IMPORT url("${path}/resources/css/style.css");
-		body{
+	body{
 	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
 	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
 	}
@@ -18,7 +18,7 @@
 	}
 </style>
 <meta charset="UTF-8">
-<title>Fila</title>
+<title>Chamado - Atendimento</title>
 <style>
     .error {
         color: red; font-weight: bold; font-size: 12px;
@@ -28,56 +28,38 @@
 <body>
 	<div class="container">
 		<c:import url="..\cabecalho.jsp" />
-		<form:form commandName="fila" class="form-horizontal" action="${path}/filas/crudFila" method="post">
-		<form:input path="id" type="hidden" value="${fila.id}"/>
+		<form:form commandName="chamado" class="form-horizontal" action="${path}/chamados/atenderChamado" method="post">
+		<form:input path="id" type="hidden" value="${chamado.id}"/>
 		
 		<div class="panel panel-group">
      		<div class="panel panel-primary">
    				<div class="panel-heading">
-   					<c:if test="${not empty fila.id}">
-	   					<strong>Alterar Fila</strong>
-					</c:if>
-   					<c:if test="${empty fila.id}">
-	   					<strong>Nova Fila</strong>
-					</c:if>  					
+	   					<strong>Atender Chamado</strong>
    				</div>
    			</div>
+   			<br>
 			<div class="panel-body">
+			
+				<div class="row top-buffer">
+				<div class="col-sm-12">
+					<label for="assunto">Assunto</label> 
+					<form:textarea id="assunto" path="assunto"  class="form-control"  rows="1"/>
+					<form:errors path="assunto" cssClass="error"/>
+				</div>
+				</div>
+								
 				<div class="row top-buffer">
 				<div class="col-sm-12">
 					<label for="descricao">Descrição</label> 
-					<form:input path="descricao" type="text" class="form-control input-sm"  maxlength="100" autofocus="autofocus"/>
- 					<form:errors path="descricao" cssClass="error"/>
+					<form:textarea id="descricao" path="descricao"  class="form-control"  rows="10"/>
+					<form:errors path="descricao" cssClass="error"/>
 				</div>
 				</div>
-				
-				<div class="row top-buffer">
-				<div class="col-sm-8">
-					<label for="gerente">Gerente</label>
-                    <form:select path="gerente" class="form-control" name="gerente">
-					<c:forEach var="gerente" items="${gerentes}">
-						<option value="${gerente.id}"
-							${gerente.id==fila.gerente.id ? 'selected' : ''}>${gerente.nome}
-						</option>
-					</c:forEach>
-					</form:select>
-					<form:errors path="gerente" cssClass="error" />
-				</div>
-				<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
-					<div class="col-sm-4">
-		                <label for="ativo">Ativo</label>
-	                    <form:select path="ativo" class="form-control" name="ativo">
-	                        <form:option value="1" label="Sim"/>
-	                        <form:option value="0" label="Não"/>
-	                    </form:select>
-		            </div>
-				</c:if>
-				</div>
-				
+						
 				<div class="row top-buffer">
 				<div class="col-sm-12">
 						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a href="${pageContext.request.contextPath}/filas" class="btn btn-default">Cancelar</a>
+						<a href="${pageContext.request.contextPath}/chamados" class="btn btn-default">Cancelar</a>
 				</div>
 				</div> 	
 			</div> 	
@@ -92,5 +74,7 @@
 	</div>
 	<script src="${path}/resources/js/jquery.min.js" 		type="text/javascript"></script>
 	<script src="${path}/resources/js/bootstrap.min.js" 	type="text/javascript"></script>
+	<script src="${path}/resources/js/jquery.maskedinput-1.3.1.min.js" type="text/javascript"></script>
+	<script src="${path}/resources/js/chamado.js" 			type="text/javascript"></script>
 </body>
 </html>

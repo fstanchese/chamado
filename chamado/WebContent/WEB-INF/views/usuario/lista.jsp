@@ -10,6 +10,13 @@
 	@IMPORT url("${path}/resources/css/custom.css");
 	@IMPORT url("${path}/resources/css/style.css");
 	@IMPORT url("${path}/resources/css/zebra.dialog.css");
+	body{
+	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+	}
+	section{
+	  margin: 50px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Cadastro de Usuários</title>
@@ -19,7 +26,6 @@
 		<c:import url="..\cabecalho.jsp" />
 		<div class="panel panel-group">
    		<div class="panel panel-primary">
- 			<div>Ola, ${login.nome} você é um ${login.tipoUsuario} ${login.fila.descricao}</div>
    			<div class="panel-heading">
 				<a href="${path}/usuarios/novo" class="btn btn-info" role="button">Novo Usuário</a>
    			</div>
@@ -34,7 +40,9 @@
 						<th align=center>Tipo de Usuário</th>
 						<th align=center>Fila</th>
 						<th align=center>SLA</th>
-						<th align=center>Ativo</th>
+						<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+							<th align=center>Ativo</th>
+						</c:if>
 						<th width="12%">&nbsp;&nbsp;Ação</th>
 					</tr>
 				</thead>
@@ -48,7 +56,9 @@
 							<td>&nbsp;${usuario.tipoUsuario}</td>
 							<td>&nbsp;${usuario.fila.descricao}</td>
 							<td>&nbsp;${usuario.sla.descricao}</td>
-							<td>&nbsp;${usuario.ativo == '1' ? 'Sim' : 'Não'}</td>
+							<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+								<td>&nbsp;${usuario.ativo == '1' ? 'Sim' : 'Não'}</td>
+							</c:if>
 							<td width="3%">
 								<a href="${path}/usuarios/edit/${usuario.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
 							</td>
