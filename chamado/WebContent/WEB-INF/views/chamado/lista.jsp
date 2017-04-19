@@ -67,7 +67,7 @@ section{
 								<td>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
 							</c:if>
 							<td width="3%">
-								<c:if test="${chamado.status eq 'ABERTO'}">
+								<c:if test="${chamado.status eq 'ABERTO' && chamado.solicitante.id eq login.id}">
 									<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
 								</c:if>
 								<c:if test="${login.tipoUsuario ne 'SOLICITANTE'}">

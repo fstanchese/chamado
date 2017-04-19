@@ -49,19 +49,19 @@ public class SLAService {
 		instant = Instant.ofEpochMilli(dtLimite.getTime());
 		limite = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
 		
-        long diferencaEmMinutos = Math.abs(ChronoUnit.MINUTES.between(hoje, limite));
-        long diferencaEmHours = Math.abs(ChronoUnit.HOURS.between(hoje, limite));
-        long diferencaEmDias = Math.abs(ChronoUnit.DAYS.between(hoje, limite));	
+        long diferencaEmMinutos = ChronoUnit.MINUTES.between(hoje, limite);
+        long diferencaEmHours = ChronoUnit.HOURS.between(hoje, limite);
+        long diferencaEmDias = ChronoUnit.DAYS.between(hoje, limite);	
         
         if (diferencaEmHours%60  == 24) diferencaEmHours = 0;
         
-        if (diferencaEmDias > 0) {
+        if (diferencaEmDias != 0) {
            dias = diferencaEmDias + " dia(s) ";
         } 
-        if (diferencaEmHours%60 > 0) {
+        if (diferencaEmHours%60 != 0) {
            horas = diferencaEmHours%60 + " hora(s) ";
         } 
-        if (diferencaEmMinutos%60 > 0) {
+        if (diferencaEmMinutos%60 != 0) {
            minutos = diferencaEmMinutos%60 + " minuto(s) ";
         }
         return dias + horas + minutos;

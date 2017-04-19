@@ -37,25 +37,59 @@
 	   					<strong>Atender Chamado</strong>
    				</div>
    			</div>
-   			<br>
 			<div class="panel-body">
-			
+
+				<div class="row top-buffer">
+				<div class="col-sm-12">
+					<label for="nome">Solicitante</label> 
+					<input type="text" name="nome" type="text" class="form-control input-sm" value="${chamado.solicitante.nome}" disabled/>
+				</div>
+				</div>
+							
+				<div class="row top-buffer">
+				<div class="col-sm-4">
+					<label for="fila">Fila</label>
+                    <select id="fila" class="form-control" name="fila" disabled>
+						<option value="${chamado.fila.id}" selected>${chamado.fila.descricao}</option>
+					</select>
+				</div>
+				
+				<div class="col-sm-4">
+					<label for="fila">Status</label>
+                    <select id="fila" class="form-control" name="fila" disabled>
+						<option value="${chamado.status}" selected>${chamado.status}</option>
+					</select>
+				</div>
+
+				<div class="col-sm-4">
+					<label for="prazo">Tempo Restante</label> 
+					<input type="text" name="prazo" type="text" class="form-control input-sm" value="${chamado.prazo}" disabled/>
+				</div>
+				</div>
+					
 				<div class="row top-buffer">
 				<div class="col-sm-12">
 					<label for="assunto">Assunto</label> 
-					<form:textarea id="assunto" path="assunto"  class="form-control"  rows="1"/>
-					<form:errors path="assunto" cssClass="error"/>
+					<input type="textarea" id="assunto" name="assunto"  class="form-control" rows="1" value="${chamado.assunto}" disabled/>
 				</div>
 				</div>
 								
 				<div class="row top-buffer">
 				<div class="col-sm-12">
 					<label for="descricao">Descrição</label> 
-					<form:textarea id="descricao" path="descricao"  class="form-control"  rows="10"/>
-					<form:errors path="descricao" cssClass="error"/>
+					<input type="textarea" id="descricao" name="descricao"  class="form-control"  rows="10" value="${chamado.descricao}" disabled/>
 				</div>
 				</div>
-						
+
+				<div class="row top-buffer">
+				<div class="col-sm-12">
+					<label for="solucao">Resposta</label> 
+					<form:textarea id="solucao" path="solucao"  class="form-control"  rows="10"/>
+					<form:errors path="solucao" cssClass="error"/>
+				</div>
+				</div>
+				
+										
 				<div class="row top-buffer">
 				<div class="col-sm-12">
 						<button type="submit" class="btn btn-primary">Salvar</button>

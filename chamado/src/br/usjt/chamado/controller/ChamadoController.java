@@ -87,9 +87,11 @@ public class ChamadoController {
 
 	@RequestMapping(value="/atender/{id}",method = RequestMethod.GET)
 	public String atendeChamado(Model model, @PathVariable("id") Long id, HttpSession session) {
-		Long idSla = null;
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		model.addAttribute("chamado",serviceChamado.buscaPorId(id));
+		Long idSla = null;
+		Chamado chamado = serviceChamado.buscaPorId(id);
+
+		model.addAttribute("chamado",chamado);
 		model.addAttribute("filas",serviceFila.listar());
 		if(usuario.getSla() == null)
 			idSla = 1L;
@@ -136,6 +138,13 @@ public class ChamadoController {
 		}
 	}
 
+	@RequestMapping(value="/atenderChamado",method = RequestMethod.POST)
+	public String crudAtender(Chamado chamado) {
+
+		serviceChamado.atender(chamado);
+		return "redirect:/chamados";
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(Fila.class, filaPropertyEditor);

@@ -1,12 +1,12 @@
 package br.usjt.chamado.model;
 
 public enum Status {
-	ABERTO("ABERTO"), FECHADO("FECHADO"), EMANALISE("EM ANÁLISE"),
+	ABERTO("ABERTO"), FECHADO("FECHADO"), EMATENDIMENTO("EM ATENDIMENTO"),
 	PENDENTE("PENDENTE"), CANCELADO("CANCELADO"), ATRASADO("ATRASADO");
 
     private String tipo;
 
-    Status(String tipo) {
+    private Status(String tipo) {
         this.tipo = tipo;
     }
 

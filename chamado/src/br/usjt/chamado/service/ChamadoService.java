@@ -1,5 +1,7 @@
 package br.usjt.chamado.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +49,7 @@ public class ChamadoService {
 		chamado.setStatus(chamadolOld.getStatus());
 		chamado.setSolicitante(chamadolOld.getSolicitante());
 		chamado.setDtAlteracao(chamadolOld.getDtAlteracao());
+		
 		if (chamado.getAtivo() == null) {
 			chamado.setAtivo(chamadolOld.getAtivo());
 		}
@@ -64,7 +67,10 @@ public class ChamadoService {
 	}
 	
 	public Chamado buscaPorId(Long id) {
-		return daoChamado.buscaPorId(id);
+		Chamado chamado = daoChamado.buscaPorId(id);
+		String prazo = serviceSLA.calculaPrazo(chamado.getDtLimite());
+		chamado.setPrazo(prazo);
+		return chamado;
 	}
 	
 
@@ -73,11 +79,39 @@ public class ChamadoService {
 		List<Chamado> lista = daoChamado.listarSolucionador(solicitante);
 		for (Chamado chamado : lista) {
 			String prazo = serviceSLA.calculaPrazo(chamado.getDtLimite());
-			if (serviceSLA.estaAtrasado(chamado.getDtLimite())) {
+			if (serviceSLA.estaAtrasado(chamado.getDtLimite()) && chamado.getStatus().equals(Status.ABERTO)) {
 			  chamado.setStatus(Status.ATRASADO);
 			}
 			chamado.setPrazo(prazo);
 		}
 		return lista;
+	}
+
+	public void atender(Chamado chamado) {
+		
+		Chamado chamadoOld = buscaPorId(chamado.getId());
+		chamado.setFila(chamadoOld.getFila());
+		chamado.setSolicitante(chamadoOld.getSolicitante());
+		chamado.setDtCadastro(chamadoOld.getDtCadastro());
+		chamado.setDtAlteracao(chamadoOld.getDtAlteracao());	
+		chamado.setDtLimite(chamadoOld.getDtLimite());
+		chamado.setDtInicioAtendimento(chamadoOld.getDtInicioAtendimento());
+		chamado.setDtFimAtendimento(chamadoOld.getDtFimAtendimento());
+		chamado.setStatus(chamadoOld.getStatus());
+		chamado.setAssunto(chamadoOld.getAssunto());
+		chamado.setDescricao(chamadoOld.getDescricao());
+		chamado.setSla(chamadoOld.getSla());
+		
+		if (chamado.getAtivo() == null) {
+			chamado.setAtivo(chamadoOld.getAtivo());
+		}	
+
+		if (!chamado.getSolucao().equals("")) {
+			if (chamado.getDtInicioAtendimento() == null) {
+				chamado.setDtInicioAtendimento(new Date());
+			}
+			chamado.setStatus(Status.EMATENDIMENTO);
+			daoChamado.alterar(chamado);
+		}
 	}
 }
