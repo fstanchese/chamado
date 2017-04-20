@@ -13,7 +13,10 @@
 		<style type="text/css">
 		@IMPORT url("${path}/resources/css/bootstrap.min.css");
 		@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
-			
+		body{
+		  background: -webkit-linear-gradient(left, #e1e5f2, #0c35b7);
+		  background: linear-gradient(to right, #e1e5f2, #0c35b7);
+		}			
 			#flogin{
 				width: 400px;
 				margin-left: auto;

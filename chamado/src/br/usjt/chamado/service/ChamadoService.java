@@ -109,6 +109,11 @@ public class ChamadoService {
 				chamado.setDtInicioAtendimento(new Date());
 			}
 			chamado.setStatus(Status.EMATENDIMENTO);
+			System.out.println("finaliza"+chamado.getFinaliza());
+			if (chamado.getFinaliza().equals("Sim")) {
+				chamado.setStatus(Status.FECHADO);
+				chamado.setDtFimAtendimento(new Date());
+			}
 			daoChamado.alterar(chamado);
 		}
 	}

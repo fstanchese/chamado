@@ -9,7 +9,6 @@
 @IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
 @IMPORT url("${path}/resources/css/style.css");
 @IMPORT url("${path}/resources/css/custom.css");
-
 .panel-heading {
     color: #fff;
     background-color: #428bca;
@@ -17,8 +16,8 @@
     margin-top: 50px;
 }
 body{
-  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
-  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+	  background: -webkit-linear-gradient(left, #e1e5f2, #0c35b7);
+	  background: linear-gradient(to right, #e1e5f2, #0c35b7);
 }
 </style>
 <meta charset="UTF-8">
@@ -71,7 +70,7 @@ body{
 								<c:if test="${chamado.status eq 'ABERTO' && chamado.solicitante.id eq login.id}">
 									<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
 								</c:if>
-								<c:if test="${login.tipoUsuario ne 'SOLICITANTE'}">
+								<c:if test="${login.tipoUsuario ne 'SOLICITANTE' && chamado.status ne 'FECHADO'}">
 									<a href="${path}/chamados/atender/${chamado.id}" class="btn btn-info btn-xs" role="button">Atender</a>
 								</c:if>							
 							</td>

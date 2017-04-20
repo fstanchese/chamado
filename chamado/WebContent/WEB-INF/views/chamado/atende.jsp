@@ -16,8 +16,8 @@
     margin-top: 50px;
 }
 body{
-  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
-  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+  background: -webkit-linear-gradient(left, #e1e5f2, #0c35b7);
+  background: linear-gradient(to right, #e1e5f2, #0c35b7);
 }
 </style>
 <meta charset="UTF-8">
@@ -95,9 +95,9 @@ body{
 				<div class="row top-buffer">
 					<div class="col-sm-4">
 		                <label for="finaliza">Finaliza ?</label>
-	                    <form:select path="finaliza" class="form-control" name="finaliza">
-	                        <form:option value="0" label="Não"/>
-	                        <form:option value="1" label="Sim"/>
+	                    <form:select path="finaliza" class="form-control">
+	                        <form:option value="Nao" label="Não"/>
+	                        <form:option value="Sim" label="Sim"/>
 	                    </form:select>
 		            </div>
 				</div>
