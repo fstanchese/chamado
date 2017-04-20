@@ -4,19 +4,22 @@
 <html>
 <head>
 <style type="text/css">
-	<c:set var="path" value="${pageContext.request.contextPath}" scope="request"/>
-	@IMPORT url("${path}/resources/css/bootstrap.min.css");
-	@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
-	@IMPORT url("${path}/resources/css/custom.css");
-	@IMPORT url("${path}/resources/css/style.css");
-	@IMPORT url("${path}/resources/css/zebra.dialog.css");
-	body{
-	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
-	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
-	}
-	section{
-	  margin: 50px;
-	}
+<c:set var="path" value="${pageContext.request.contextPath}" scope="request"/>
+@IMPORT url("${path}/resources/css/bootstrap.min.css");
+@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
+@IMPORT url("${path}/resources/css/custom.css");
+@IMPORT url("${path}/resources/css/style.css");
+@IMPORT url("${path}/resources/css/zebra.dialog.css");
+.panel-heading {
+   color: #fff;
+   background-color: #428bca;
+   border-color: #428bca;
+   margin-top: 50px;
+}
+body{
+  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+}
 </style>
 <meta charset="UTF-8">
 <title>Cadastro de Filas</title>

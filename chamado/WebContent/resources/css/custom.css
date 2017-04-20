@@ -1,4 +1,10 @@
-/* Table Base */
+.panel-heading {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca;
+    margin-top: 48px;
+}
+
 table {
 	max-width: 100%;
 	background-color: transparent;

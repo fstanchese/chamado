@@ -1,9 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Barra superior com os menus de navegação -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
-		<button class="navbar-toggle" type="button" data-toggle="collapse"
-			data-target=".bs-navbar-collapse">
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>

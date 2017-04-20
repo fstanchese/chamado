@@ -97,6 +97,7 @@ public class Chamado implements Serializable {
 	private Integer ativo;
 	
 	transient String prazo;
+	transient String finaliza;
 	
 	public void setPrazo(String prazo) {
 		this.prazo = prazo;
@@ -214,6 +215,14 @@ public class Chamado implements Serializable {
 	
 	public void setDtAlteracao(Date dtAlteracao) {
 		this.dtAlteracao = dtAlteracao;
+	}
+	
+	public String getFinaliza() {
+		return finaliza;
+	}
+	
+	public void setFinaliza(String finaliza) {
+		this.finaliza = finaliza;
 	}
 	
 	@Override

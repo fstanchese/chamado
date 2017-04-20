@@ -4,18 +4,21 @@
 <html>
 <head>
 <style type="text/css">
-	<c:set var="path" value="${pageContext.request.contextPath}" scope="request"/>
-	@IMPORT url("${path}/resources/css/bootstrap.min.css");
-	@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
-	@IMPORT url("${path}/resources/css/custom.css");
-	@IMPORT url("${path}/resources/css/style.css");
-	body{
-	  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
-	  background: linear-gradient(to right, #dcdfe8, #4b62a8);
-	}
-	section{
-	  margin: 50px;
-	}
+<c:set var="path" value="${pageContext.request.contextPath}" scope="request"/>
+@IMPORT url("${path}/resources/css/bootstrap.min.css");
+@IMPORT url("${path}/resources/css/bootstrap-theme.min.css");
+@IMPORT url("${path}/resources/css/custom.css");
+@IMPORT url("${path}/resources/css/style.css");
+.panel-heading {
+   color: #fff;
+   background-color: #428bca;
+   border-color: #428bca;
+    margin-top: 50px;
+}
+body{
+  background: -webkit-linear-gradient(left, #dcdfe8, #4b62a8);
+  background: linear-gradient(to right, #dcdfe8, #4b62a8);
+}
 </style>
 <meta charset="UTF-8">
 <title>Chamado - Atendimento</title>
@@ -88,7 +91,17 @@
 					<form:errors path="solucao" cssClass="error"/>
 				</div>
 				</div>
-				
+
+				<div class="row top-buffer">
+					<div class="col-sm-4">
+		                <label for="finaliza">Finaliza ?</label>
+	                    <form:select path="finaliza" class="form-control" name="finaliza">
+	                        <form:option value="0" label="Não"/>
+	                        <form:option value="1" label="Sim"/>
+	                    </form:select>
+		            </div>
+				</div>
+								
 										
 				<div class="row top-buffer">
 				<div class="col-sm-12">
