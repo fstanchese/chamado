@@ -15,8 +15,8 @@ public class FilaDAO {
 	@PersistenceContext
 	EntityManager manager;
 
-	public void adicionar(Fila fila) {
-		manager.persist(fila);
+	public Fila  adicionar(Fila fila) {
+		return manager.merge(fila);
 	}
 
 	public void alterar(Fila fila) {
