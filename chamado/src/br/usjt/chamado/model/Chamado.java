@@ -98,7 +98,7 @@ public class Chamado implements Serializable {
 	
 	transient String prazo;
 	transient String finaliza;
-	
+
 	public void setPrazo(String prazo) {
 		this.prazo = prazo;
 	}
