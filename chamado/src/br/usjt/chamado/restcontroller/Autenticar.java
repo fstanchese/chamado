@@ -20,12 +20,12 @@ public class Autenticar {
 	}
 	
 	@RequestMapping(value="/logar",method = RequestMethod.GET)
-	public String efetuaLogin(@RequestParam(value="login") String login, @RequestParam(value="senha") String senha ) {
+	public Usuario efetuaLogin(@RequestParam(value="login") String login, @RequestParam(value="senha") String senha ) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
 		if (!usuario.getSenha().equals(senha)) {
-			return "login_erro";
+			return new Usuario();
 		}
 		System.out.println("usuario "+login.toString());
-		return "login_ok";
+		return usuario;
 	}
 }
