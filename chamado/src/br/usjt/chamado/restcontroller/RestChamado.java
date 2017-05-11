@@ -25,7 +25,7 @@ public class RestChamado {
 		this.daoLogin = daoLogin;
 	}
 	
-	@RequestMapping(value="/listachamados",method = RequestMethod.GET)
+	@RequestMapping(value="/listarchamados",method = RequestMethod.GET)
 	public List<Chamado> listarTodos(@RequestParam(value="login") String login) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
 		List<Chamado> chamados = daoChamado.listarSolucionador(usuario);
