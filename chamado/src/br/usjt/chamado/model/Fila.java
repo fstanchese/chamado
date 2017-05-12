@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -38,7 +39,7 @@ public class Fila {
     
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "gerente_id")
-	@JsonManagedReference
+	@JsonIgnore
 	private Usuario gerente;
 
 	@Column(name = "ativo", length = 1, nullable = false)    
@@ -101,12 +102,5 @@ public class Fila {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Fila [id=" + id + ", descricao=" + descricao+"]";
-	}
-    
-	
-    
     
 }

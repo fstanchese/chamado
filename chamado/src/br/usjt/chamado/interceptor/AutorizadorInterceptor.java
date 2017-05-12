@@ -13,8 +13,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		String uri = request.getRequestURI();
 
-		if (uri.endsWith("loginForm") || uri.endsWith("logar")|| uri.endsWith("listachamados") || uri.endsWith("efetuaLogin") || uri.contains("css") || uri.contains("js")
-				|| uri.contains("img")) {
+		if (uri.endsWith("loginForm") || uri.endsWith("logar") || uri.endsWith("listarfilas") ||
+			uri.endsWith("listarchamados") || uri.endsWith("listarusuarios") || uri.endsWith("efetuaLogin") || 
+			uri.contains("css") || uri.contains("js") || uri.contains("img")) {
 			return true;
 		}
 		if (request.getSession().getAttribute("usuarioLogado") != null) {

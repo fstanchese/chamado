@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -77,12 +78,12 @@ public class Usuario implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "fila_id")
-	@JsonManagedReference
+	@JsonIgnore
 	private Fila fila;	
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "sla_id")
-	@JsonManagedReference
+	@JsonIgnore
 	private SLA sla;
 
 	@Column(name = "ativo", length = 1, nullable = false)    
@@ -184,12 +185,6 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(Integer ativo) {
 		this.ativo = ativo;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", celular=" + celular
-				+ ", cpf=" + cpf + ", tipoUsuario=" + tipoUsuario + ", email=" + email + "]";
 	}
 
 	@Override
