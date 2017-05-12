@@ -38,15 +38,29 @@ public class UsuarioDAO {
 		return manager.createNamedQuery("Usuario.listar").getResultList();
 	}
 	
-	public Usuario buscaPorLogin(String login) {
+	public Usuario buscaPorUsuario(String login,String senha) {
 		try {
-			return (Usuario) manager.createNamedQuery("Usuario.buscaPorLogin").
-				setParameter("login", login).getSingleResult();
+			return (Usuario) manager.createNamedQuery("Usuario.buscaUsuario").
+				setParameter("login", login).
+				setParameter("senha", senha).
+				getSingleResult();
 		}catch (NoResultException nre){
+			System.out.println("passei");
 			return null;
 		}		
 	}
 
+	public Usuario buscaPorLogin(String login) {
+		try {
+			return (Usuario) manager.createNamedQuery("Usuario.buscaLogin").
+				setParameter("login", login).
+				getSingleResult();
+		}catch (NoResultException nre){
+			System.out.println("passei");
+			return null;
+		}		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Usuario> listarSolucionador() {
 		return manager.createNamedQuery("Usuario.listarSolucionador").getResultList();

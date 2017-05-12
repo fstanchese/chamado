@@ -21,11 +21,7 @@ public class Autenticar {
 	
 	@RequestMapping(value="/logar",method = RequestMethod.GET)
 	public Usuario efetuaLogin(@RequestParam(value="login") String login, @RequestParam(value="senha") String senha ) {
-		Usuario usuario = daoLogin.buscaPorLogin(login);
-		if (!usuario.getSenha().equals(senha)) {
-			return new Usuario();
-		}
-		System.out.println("usuario "+login.toString());
+		Usuario usuario = daoLogin.buscaPorUsuario(login,senha);
 		return usuario;
 	}
 }
