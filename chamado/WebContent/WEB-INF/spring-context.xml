@@ -26,7 +26,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/chamados" />
 		<property name="username" value="root" />
-		<property name="password" value="foursys@2016" />
+		<property name="password" value="123456" />
 	</bean>
 
 	<bean id="entityManagerFactory"
