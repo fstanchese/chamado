@@ -3,6 +3,7 @@ package br.usjt.chamado.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -38,8 +39,12 @@ public class UsuarioDAO {
 	}
 	
 	public Usuario buscaPorLogin(String login) {
-		return (Usuario) manager.createNamedQuery("Usuario.buscaPorLogin").
+		try {
+			return (Usuario) manager.createNamedQuery("Usuario.buscaPorLogin").
 				setParameter("login", login).getSingleResult();
+		}catch (NoResultException nre){
+			return null;
+		}		
 	}
 
 	@SuppressWarnings("unchecked")
