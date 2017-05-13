@@ -11,6 +11,7 @@ import br.usjt.chamado.dao.UsuarioDAO;
 import br.usjt.chamado.model.Usuario;
 
 @RestController
+@RequestMapping("/rest/v1/usuarios")
 public class RestUsuario {
 
 	private UsuarioDAO daoUsuario;
@@ -20,7 +21,7 @@ public class RestUsuario {
 		this.daoUsuario = daoUsuario;
 	}
 	
-	@RequestMapping(value="/listarusuarios",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Usuario> listarTodos() {
 		List<Usuario> usuarios = daoUsuario.listar();
 		return usuarios;

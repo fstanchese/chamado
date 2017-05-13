@@ -52,7 +52,7 @@ public class UsuarioDAO {
 
 	public Usuario buscaPorLogin(String login) {
 		try {
-			return (Usuario) manager.createNamedQuery("Usuario.buscaLogin").
+			return (Usuario) manager.createNamedQuery("Usuario.buscaPorLogin").
 				setParameter("login", login).
 				getSingleResult();
 		}catch (NoResultException nre){

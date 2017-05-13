@@ -14,6 +14,7 @@ import br.usjt.chamado.model.Chamado;
 import br.usjt.chamado.model.Usuario;
 
 @RestController
+@RequestMapping("/rest/v1/chamados")
 public class RestChamado {
 
 	private ChamadoDAO daoChamado;
@@ -25,10 +26,13 @@ public class RestChamado {
 		this.daoLogin = daoLogin;
 	}
 	
-	@RequestMapping(value="/listarchamados",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Chamado> listarTodos(@RequestParam(value="login") String login) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
-		List<Chamado> chamados = daoChamado.listarSolucionador(usuario);
-		return chamados;
+		if (usuario != null) {
+			return daoChamado.listarSolucionador(usuario);
+		} else
+			return null;
 	}
+
 }

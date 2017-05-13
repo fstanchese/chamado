@@ -19,7 +19,7 @@ public class Autenticar {
 		this.daoLogin = daoLogin;
 	}
 	
-	@RequestMapping(value="/logar",method = RequestMethod.GET)
+	@RequestMapping(value="/rest/v1/logar",method = RequestMethod.GET)
 	public Usuario efetuaLogin(@RequestParam(value="login") String login, @RequestParam(value="senha") String senha ) {
 		Usuario usuario = daoLogin.buscaPorUsuario(login,senha);
 		return usuario;
