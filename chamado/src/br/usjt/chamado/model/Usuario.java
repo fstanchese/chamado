@@ -22,7 +22,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="usuario")
@@ -31,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 	@NamedQuery(name = "Usuario.listar", query = "select u from Usuario u order by u.nome"),
 	@NamedQuery(name = "Usuario.buscaPorId", query = "select u from Usuario u where u.id=:id"), 
 	@NamedQuery(name = "Usuario.buscaPorLogin", query = "select u from Usuario u where u.login=:login"),
+	@NamedQuery(name = "Usuario.buscaPorFila", query = "select u from Usuario u where u.fila=:fila"),
 	@NamedQuery(name = "Usuario.listarSolucionador", query = "select u from Usuario u where u.tipoUsuario = 'SOLUCIONADOR' order by u.nome"),
 })
 public class Usuario implements Serializable {

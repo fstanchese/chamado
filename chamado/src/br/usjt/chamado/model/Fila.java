@@ -15,9 +15,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name="fila")
 @NamedQueries({ 
@@ -39,12 +36,21 @@ public class Fila {
     
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "gerente_id")
-	@JsonIgnore
 	private Usuario gerente;
 
 	@Column(name = "ativo", length = 1, nullable = false)    
 	private Integer ativo;
-	
+
+    transient String nomeSolucionador;
+
+    public String getNomeSolucionador() {
+		return nomeSolucionador;
+	}
+
+	public void setNomeSolucionador(String nomeSolucionador) {
+		this.nomeSolucionador = nomeSolucionador;
+	}
+
 	public Long getId() {
 		return id;
 	}
