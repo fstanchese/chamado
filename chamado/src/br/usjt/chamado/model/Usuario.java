@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	@NamedQuery(name = "Usuario.buscaPorId", query = "select u from Usuario u where u.id=:id"), 
 	@NamedQuery(name = "Usuario.buscaPorLogin", query = "select u from Usuario u where u.login=:login"),
 	@NamedQuery(name = "Usuario.buscaPorFila", query = "select u from Usuario u where u.fila=:fila"),
-	@NamedQuery(name = "Usuario.listarSolucionador", query = "select u from Usuario u where u.tipoUsuario = 'SOLUCIONADOR' order by u.nome"),
+	@NamedQuery(name = "Usuario.listarSolucionador", query = "select u from Usuario u where u.tipoUsuario in ('SOLUCIONADOR','ADMINISTRADOR')  order by u.nome"),
 })
 public class Usuario implements Serializable {
 
