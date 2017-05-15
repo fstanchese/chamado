@@ -14,7 +14,6 @@ import br.usjt.chamado.model.Chamado;
 import br.usjt.chamado.model.Usuario;
 
 @RestController
-@RequestMapping("/rest/v1/chamados")
 public class RestChamado {
 
 	private ChamadoDAO daoChamado;
@@ -26,7 +25,7 @@ public class RestChamado {
 		this.daoLogin = daoLogin;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/rest/v1/chamados", method = RequestMethod.GET)
 	public List<Chamado> listarTodos(@RequestParam(value="login") String login) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
 		if (usuario != null) {

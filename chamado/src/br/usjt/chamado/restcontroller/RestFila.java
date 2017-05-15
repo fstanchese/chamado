@@ -11,7 +11,6 @@ import br.usjt.chamado.dao.FilaDAO;
 import br.usjt.chamado.model.Fila;
 
 @RestController
-@RequestMapping("/rest/v1/filas")
 public class RestFila {
 
 	private FilaDAO daoFila;
@@ -21,7 +20,7 @@ public class RestFila {
 		this.daoFila = daoFila;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/rest/v1/filas",method = RequestMethod.GET)
 	public List<Fila> listarTodos() {
 		List<Fila> filas = daoFila.listar();
 		return filas;
