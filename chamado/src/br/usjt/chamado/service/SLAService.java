@@ -40,8 +40,7 @@ public class SLAService {
 		return daoSLA.buscaPorUsuario(id);
 	}
 	
-	public String calculaPrazo(Date dtLimite) {
-        LocalDateTime hoje = LocalDateTime.now();
+	public String calculaPrazo(Date dtLimite, LocalDateTime hoje) {
         LocalDateTime limite;
         Instant instant;
         String dias = "",horas = "",minutos = "";

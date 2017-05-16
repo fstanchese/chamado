@@ -1,5 +1,7 @@
 package br.usjt.chamado.service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -65,18 +67,35 @@ public class ChamadoService {
 	}
 	
 	public Chamado buscaPorId(Long id) {
-		Chamado chamado = daoChamado.buscaPorId(id);
-		String prazo = serviceSLA.calculaPrazo(chamado.getDtLimite());
+        LocalDateTime hoje;
+        Date dataInicio;
+        Chamado chamado = daoChamado.buscaPorId(id);
+		hoje = LocalDateTime.now();
+		dataInicio = chamado.getDtLimite();
+		if (chamado.getStatus().equals(Status.FECHADO)) {
+			hoje = chamado.getDtInicioAtendimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			dataInicio = chamado.getDtInicioAtendimento();				
+		}
+		String prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
 		chamado.setPrazo(prazo);
 		return chamado;
 	}
 	
 
 	public List<Chamado> listarSolucionador(Usuario solicitante) {
+        LocalDateTime hoje;
+        Date dataInicio;
         
 		List<Chamado> lista = daoChamado.listarSolucionador(solicitante);
 		for (Chamado chamado : lista) {
-			String prazo = serviceSLA.calculaPrazo(chamado.getDtLimite());
+			hoje = LocalDateTime.now();
+			dataInicio = chamado.getDtLimite();
+			if (chamado.getStatus().equals(Status.FECHADO)) {
+				hoje = chamado.getDtInicioAtendimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				dataInicio = chamado.getDtFimAtendimento();				
+			}
+			String prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
+			
 			if (serviceSLA.estaAtrasado(chamado.getDtLimite()) && chamado.getStatus().equals(Status.ABERTO)) {
 			  chamado.setStatus(Status.ATRASADO);
 			}
@@ -109,7 +128,6 @@ public class ChamadoService {
 				chamado.setDtInicioAtendimento(new Date());
 			}
 			chamado.setStatus(Status.EMATENDIMENTO);
-			System.out.println("finaliza"+chamado.getFinaliza());
 			if (chamado.getFinaliza().equals("Sim")) {
 				chamado.setStatus(Status.FECHADO);
 				chamado.setDtFimAtendimento(new Date());

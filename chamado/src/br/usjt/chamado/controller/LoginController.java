@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.usjt.chamado.dao.LoginDAO;
 import br.usjt.chamado.model.Usuario;
+import br.usjt.chamado.service.ChamadoService;
 
 @Controller
 public class LoginController {
 
 	private LoginDAO daoLogin;
+	private ChamadoService serviceChamado;
 
 	@Autowired
-	public LoginController(LoginDAO daoLogin) {
+	public LoginController(LoginDAO daoLogin, ChamadoService serviceChamado) {
 		this.daoLogin = daoLogin;
+		this.serviceChamado = serviceChamado;
 	}
 
 	@RequestMapping("loginForm")
@@ -28,8 +31,9 @@ public class LoginController {
 	@RequestMapping("menu")
 	public String menuForm(Model model, HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario));
 		model.addAttribute("login", usuario);
-		return "menuPrincipal";
+		return "chamado/lista";
 	}
 	
 	@RequestMapping("efetuaLogin")
