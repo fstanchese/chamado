@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.usjt.chamado.model.Chamado;
 import br.usjt.chamado.model.Fila;
@@ -46,9 +47,11 @@ public class ChamadoController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String listaTodos(Model model, HttpSession session) {
+	public String listaTodos(Model model, HttpSession session, @RequestParam(defaultValue = "") String statusId) {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario));
+		model.addAttribute("statusFiltro",statusId);
+		System.out.println(statusId);
 		model.addAttribute("login", usuario);
 		return "chamado/lista";
 	}

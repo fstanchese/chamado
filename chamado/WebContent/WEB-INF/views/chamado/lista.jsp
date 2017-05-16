@@ -20,16 +20,37 @@ body{
 	  background: linear-gradient(to right, #e1e5f2, #0c35b7);
 }
 </style>
-<meta charset="UTF-8">
+	<script src="${path}/resources/js/jquery.min.js" 		type="text/javascript"></script>
+	<script src="${path}/resources/js/bootstrap.min.js" 	type="text/javascript"></script><meta charset="UTF-8">
 <title>Cadastro de Chamados</title>
 </head>
 <body>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#statusId').on('change', function() {
+			this.form.submit();
+	  	});
+	});
+	</script>
 	<div class="container">
 		<c:import url="..\cabecalho.jsp" />
 		<div class="panel panel-group">
    		<div class="panel panel-primary">
    			<div class="panel-heading">
 				<a href="${path}/chamados/novo" class="btn btn-info" role="button">Novo Chamado</a>
+				<br>
+				<br>
+				<form class="form-horizontal">
+                    <select id="statusId" class="form-control" name="statusId">
+                        <option value="ABERTO" ${"ABERTO"==statusFiltro ? 'selected' : ''}>Aberto</option>
+                        <option value="FECHADO" ${"FECHADO"==statusFiltro ? 'selected' : ''}>Fechado</option>
+                        <option value="EMATENDIMENTO" ${"EMATENDIMENTO"==statusFiltro ? 'selected' : ''}>Em atendimento</option>
+                        <option value="PENDENTE" ${"PENDENTE"==statusFiltro ? 'selected' : ''}>Pendente</option>
+                        <option value="CANCELADO" ${"CANCELADO"==statusFiltro ? 'selected' : ''}>Cancelado</option>
+                        <option value="ATRASADO" ${"ATRASADO"==statusFiltro ? 'selected' : ''}>Atrasado</option>
+                        <option value="TODOS" ${"TODOS"==statusFiltro ? 'selected' : ''}>Todos</option>
+                    </select>
+				</form>
    			</div>
 			<c:if test="${not empty chamados}">
 				<table class="table table-hover table-condensed table-striped table-bordered">
@@ -82,8 +103,6 @@ body{
 		</div>
 		</div>
 	</div>
-	<script src="${path}/resources/js/jquery.min.js" 		type="text/javascript"></script>
-	<script src="${path}/resources/js/bootstrap.min.js" 	type="text/javascript"></script>
 	<script src="${path}/resources/js/zebra.dialog.js" 		type="text/javascript"></script>
 	<script src="${path}/resources/js/zebra.dialog.src.js" 	type="text/javascript"></script>
 </body>

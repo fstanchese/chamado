@@ -3,7 +3,9 @@ package br.usjt.chamado.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import org.springframework.stereotype.Repository;
 
@@ -38,15 +40,29 @@ public class ChamadoDAO {
 	public List<Chamado> listarSolucionador(Usuario usuario) {
 		List<Chamado> lista = null;
 		if(usuario.getTipoUsuario() == TipoUsuario.SOLICITANTE ) {
-			lista = manager.createNamedQuery("Chamado.listarSolicitante")
-					.setParameter("solicitante", usuario)
-					.getResultList();
+			try {
+				lista = manager.createNamedQuery("Chamado.listarSolicitante")
+						.setParameter("solicitante", usuario)
+						.getResultList();				
+			}catch (PersistenceException e) {
+				lista = null;	
+			}
 		} else if(usuario.getTipoUsuario() == TipoUsuario.ADMINISTRADOR )  {
-			lista = manager.createNamedQuery("Chamado.listar").getResultList();			
+			try {
+				lista = manager.createNamedQuery("Chamado.listar").getResultList();			
+			} catch (PersistenceException e) {
+				lista = null;	
+			}
 		} else if(usuario.getTipoUsuario() == TipoUsuario.SOLUCIONADOR )  {
-			lista = manager.createNamedQuery("Chamado.listarFila")
-					.setParameter("fila", usuario.getFila())
-					.getResultList();		
+			try {
+				lista = manager.createNamedQuery("Chamado.listarFila")
+						.setParameter("fila", usuario.getFila())
+						.setParameter("usuario", usuario)
+						.getResultList();				
+			} catch (PersistenceException e) {
+				lista = null;	
+			}
+		
 		}
 		return lista;
 	}

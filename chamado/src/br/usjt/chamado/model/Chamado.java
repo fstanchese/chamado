@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 	@NamedQuery(name = "Chamado.buscaPorId", query = "select c from Chamado c where c.id=:id"), 
 	@NamedQuery(name = "Chamado.listar", query = "select c from Chamado c order by c.dtCadastro"),
 	@NamedQuery(name = "Chamado.listarSolicitante", query = "select c from Chamado c where c.solicitante = :solicitante and c.ativo=1 order by c.dtCadastro"),
-	@NamedQuery(name = "Chamado.listarFila", query = "select c from Chamado c where c.fila = :fila and c.ativo=1 order by c.dtCadastro")
+	@NamedQuery(name = "Chamado.listarFila", query = "select c from Chamado c where (c.fila = :fila or solicitante = :usuario) and c.ativo=1 order by c.dtCadastro")
 })
 public class Chamado implements Serializable {
 

@@ -33,16 +33,17 @@ public class LoginController {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario));
 		model.addAttribute("login", usuario);
-		return "chamado/lista";
+		return "menuPrincipal";
 	}
 	
 	@RequestMapping("efetuaLogin")
-	public String efetuaLogin(Usuario usuario, HttpSession session) {
+	public String efetuaLogin(Model model, Usuario usuario, HttpSession session) {
 		Usuario login = daoLogin.buscaUsuario(usuario);
 		if (login.getId() != null) {
-			System.out.println("usuario "+login.toString());
 			session.setAttribute("usuarioLogado", login);
-			return "redirect:menu";
+			model.addAttribute("chamados",serviceChamado.listarSolucionador(login));
+			model.addAttribute("login", login);
+			return "redirect:chamados";
 		}
 		return "redirect:loginForm";
 	}
