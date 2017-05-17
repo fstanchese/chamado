@@ -47,8 +47,7 @@ public class ChamadoController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String listaTodos(Model model, HttpSession session, @RequestParam(defaultValue = "") String statusId) {
-		if (statusId == null) statusId = "ABERTO";
+	public String listaTodos(Model model, HttpSession session, @RequestParam(defaultValue = "ABERTO") String statusId) {
 		System.out.println("status X"+statusId+"X");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario,statusId));

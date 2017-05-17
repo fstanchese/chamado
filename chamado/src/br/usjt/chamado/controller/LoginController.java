@@ -36,7 +36,7 @@ public class LoginController {
 		if (login.getId() != null) {
 			session.setAttribute("usuarioLogado", login);
 			model.addAttribute("login", login);
-			return "redirect:chamados?statusId=ABERTO";
+			return "redirect:chamados";
 		}
 		return "redirect:loginForm";
 	}

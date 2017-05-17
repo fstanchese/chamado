@@ -27,8 +27,8 @@ body{
 <body>
 	<div class="container">
 		<c:import url="..\cabecalho.jsp" />
-		<div class="panel panel-group">
-   		<div class="panel panel-primary">
+		<div style="overflow-x:auto;" class="panel panel-group">
+   		<div style="overflow-x:auto;" class="panel panel-primary">
    			<div class="panel-heading">
 				<a href="${path}/filas/novo" class="btn btn-info" role="button">Nova Fila</a>
    			</div>
