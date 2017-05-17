@@ -3,7 +3,6 @@ package br.usjt.chamado.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
@@ -37,19 +36,25 @@ public class ChamadoDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Chamado> listarSolucionador(Usuario usuario) {
+	public List<Chamado> listarSolucionador(Usuario usuario, String status) {
 		List<Chamado> lista = null;
+		if ("TODOS".equals(status)) {
+			status = null;
+		}
 		if(usuario.getTipoUsuario() == TipoUsuario.SOLICITANTE ) {
 			try {
 				lista = manager.createNamedQuery("Chamado.listarSolicitante")
 						.setParameter("solicitante", usuario)
+						.setParameter("status",status)
 						.getResultList();				
 			}catch (PersistenceException e) {
 				lista = null;	
 			}
 		} else if(usuario.getTipoUsuario() == TipoUsuario.ADMINISTRADOR )  {
 			try {
-				lista = manager.createNamedQuery("Chamado.listar").getResultList();			
+				lista = manager.createNamedQuery("Chamado.listar")
+						.setParameter("status",status)
+						.getResultList();			
 			} catch (PersistenceException e) {
 				lista = null;	
 			}
@@ -58,6 +63,7 @@ public class ChamadoDAO {
 				lista = manager.createNamedQuery("Chamado.listarFila")
 						.setParameter("fila", usuario.getFila())
 						.setParameter("usuario", usuario)
+						.setParameter("status",status)
 						.getResultList();				
 			} catch (PersistenceException e) {
 				lista = null;	

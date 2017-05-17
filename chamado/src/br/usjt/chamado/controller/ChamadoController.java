@@ -48,8 +48,10 @@ public class ChamadoController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listaTodos(Model model, HttpSession session, @RequestParam(defaultValue = "") String statusId) {
+		if (statusId == null) statusId = "ABERTO";
+		System.out.println("status X"+statusId+"X");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario));
+		model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario,statusId));
 		model.addAttribute("statusFiltro",statusId);
 		System.out.println(statusId);
 		model.addAttribute("login", usuario);
@@ -111,7 +113,7 @@ public class ChamadoController {
 		Chamado chamado = serviceChamado.buscaPorId(id);
 		serviceChamado.remover(chamado);
 		Usuario solicitante = (Usuario) session.getAttribute("usuarioLogado");
-		model.addAttribute("chamados",serviceChamado.listarSolucionador(solicitante));
+		model.addAttribute("chamados",serviceChamado.listarSolucionador(solicitante,"ABERTO"));
 		return "redirect:/chamados";
 	}
 	
@@ -126,6 +128,7 @@ public class ChamadoController {
 			} else {
 				serviceChamado.alterar(chamado);
 			}
+			model.addAttribute("chamados",serviceChamado.listarSolucionador(usuario,"ABERTO"));
 			return "redirect:/chamados";
 		} else {
 			model.addAttribute("chamado",chamado);

@@ -90,6 +90,7 @@ body{
 				</div>
 						
 				<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
+   				<c:if test="${not empty chamado.id}">
 				<div class="row top-buffer">
 					<div class="col-sm-4">
 		                <label for="ativo">Ativo</label>
@@ -99,6 +100,7 @@ body{
 	                    </form:select>
 		            </div>
 				</div>
+				</c:if>	
 				</c:if>	
 				
 				<div class="row top-buffer">

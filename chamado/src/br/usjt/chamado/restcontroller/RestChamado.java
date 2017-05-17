@@ -29,7 +29,7 @@ public class RestChamado {
 	public List<Chamado> listarTodos(@RequestParam(value="login") String login) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
 		if (usuario != null) {
-			return daoChamado.listarSolucionador(usuario);
+			return daoChamado.listarSolucionador(usuario,"ABERTO");
 		} else
 			return null;
 	}

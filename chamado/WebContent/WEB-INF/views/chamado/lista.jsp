@@ -58,9 +58,11 @@ body{
 					<tr>
 						<th align=center>Solicitante</th>
 						<th align=center>Fila</th>
-						<th align=center>Dt Inicio Prazo</th>
-						<th align=center>Dt Limite Prazo</th>
+						<th align=center>Inicio Prazo</th>
+						<th align=center>Limite Prazo</th>
 						<th align=center>Tempo Restante</th>
+						<th align=center>Inicio Atend</th>
+						<th align=center>Fim Atend</th>
 						<th align=center>Status</th>
 						<th align=center>Assunto</th>
 						<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
@@ -75,15 +77,17 @@ body{
 							<td>&nbsp;${chamado.solicitante.nome}</td>
 							<td>&nbsp;${chamado.fila.descricao}</td>
 							<c:if test="${empty chamado.dtAlteracao}">
-								<td><fmt:formatDate value="${chamado.dtCadastro}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+								<td nowrap><fmt:formatDate value="${chamado.dtCadastro}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
 							</c:if>
 							<c:if test="${not empty chamado.dtAlteracao}">
-								<td><fmt:formatDate value="${chamado.dtAlteracao}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+								<td nowrap><fmt:formatDate value="${chamado.dtAlteracao}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
 							</c:if>							
-							<td><fmt:formatDate value="${chamado.dtLimite}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
-							<td>&nbsp;${chamado.prazo}</td>
+							<td nowrap><fmt:formatDate value="${chamado.dtLimite}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+							<td nowrap>&nbsp;${chamado.prazo}</td>
+							<td nowrap><fmt:formatDate value="${chamado.dtInicioAtendimento}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+							<td nowrap><fmt:formatDate value="${chamado.dtFimAtendimento}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
 							<td>&nbsp;${chamado.status}</td>
-							<td>&nbsp;${chamado.assunto}</td>
+							<td nowrap>&nbsp;${chamado.assunto}</td>
 							<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
 								<td>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
 							</c:if>
@@ -91,7 +95,7 @@ body{
 								<c:if test="${chamado.status eq 'ABERTO' && chamado.solicitante.id eq login.id}">
 									<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
 								</c:if>
-								<c:if test="${login.tipoUsuario ne 'SOLICITANTE' && chamado.status ne 'FECHADO'}">
+								<c:if test="${login.tipoUsuario eq 'SOLUCIONADOR' && chamado.status ne 'FECHADO'}">
 									<a href="${path}/chamados/atender/${chamado.id}" class="btn btn-info btn-xs" role="button">Atender</a>
 								</c:if>							
 							</td>
