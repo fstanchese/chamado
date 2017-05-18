@@ -74,8 +74,8 @@ body{
 				<tbody>
 					<c:forEach var="chamado" items="${chamados}">
 						<tr>
-							<td>&nbsp;${chamado.solicitante.nome}</td>
-							<td>&nbsp;${chamado.fila.descricao}</td>
+							<td nowrap>&nbsp;${chamado.solicitante.nome}</td>
+							<td nowrap>&nbsp;${chamado.fila.descricao}</td>
 							<c:if test="${empty chamado.dtAlteracao}">
 								<td nowrap><fmt:formatDate value="${chamado.dtCadastro}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
 							</c:if>
@@ -89,7 +89,7 @@ body{
 							<td>&nbsp;${chamado.status}</td>
 							<td nowrap>&nbsp;${chamado.assunto}</td>
 							<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
-								<td>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
+								<td nowrap>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
 							</c:if>
 							<td width="3%">
 								<c:if test="${chamado.status eq 'ABERTO' && chamado.solicitante.id eq login.id}">
