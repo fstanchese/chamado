@@ -26,10 +26,10 @@ public class RestChamado {
 	}
 	
 	@RequestMapping(value="/rest/v1/chamados", method = RequestMethod.GET)
-	public List<Chamado> listarTodos(@RequestParam(value="login") String login) {
+	public List<Chamado> listarTodos(@RequestParam(value="login") String login, @RequestParam(value="status") String status ) {
 		Usuario usuario = daoLogin.buscaPorLogin(login);
 		if (usuario != null) {
-			return daoChamado.listarSolucionador(usuario,"ABERTO");
+			return daoChamado.listarSolucionador(usuario,status);
 		} else
 			return null;
 	}
