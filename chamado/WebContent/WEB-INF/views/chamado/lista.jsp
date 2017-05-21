@@ -19,6 +19,10 @@ body{
 	  background: -webkit-linear-gradient(left, #e1e5f2, #0c35b7);
 	  background: linear-gradient(to right, #e1e5f2, #0c35b7);
 }
+.disabled {
+   pointer-events: none;
+   cursor: default;
+}
 </style>
 	<script src="${path}/resources/js/jquery.min.js" 		type="text/javascript"></script>
 	<script src="${path}/resources/js/bootstrap.min.js" 	type="text/javascript"></script><meta charset="UTF-8">
@@ -91,13 +95,17 @@ body{
 							<c:if test="${login.tipoUsuario eq 'ADMINISTRADOR'}">
 								<td nowrap>&nbsp;${chamado.ativo == '1' ? 'Sim' : 'Não'}</td>
 							</c:if>
-							<td width="3%">
+							<c:set var="disabled" value="disabled" scope="request"/>
+							
+							<td nowrap width="3%">
 								<c:if test="${chamado.status eq 'ABERTO' && chamado.solicitante.id eq login.id}">
-									<a href="${path}/chamados/edit/${chamado.id}" class="btn btn-warning btn-xs" role="button">Alterar</a>
+									<c:set var="disabled" value="" scope="request"/>
 								</c:if>
 								<c:if test="${login.tipoUsuario eq 'SOLUCIONADOR' && chamado.status ne 'FECHADO'}">
-									<a href="${path}/chamados/atender/${chamado.id}" class="btn btn-info btn-xs" role="button">Atender</a>
+									<c:set var="disabled" value="" scope="request"/>
 								</c:if>							
+								<a href="${path}/chamados/edit/${chamado.id}" class="${disabled} btn btn-warning btn-xs" role="button">Alterar</a>
+								<a href="${path}/chamados/atender/${chamado.id}" class="${disabled} btn btn-info btn-xs" role="button">Atender</a>
 							</td>
 						</tr>
 					</c:forEach>
