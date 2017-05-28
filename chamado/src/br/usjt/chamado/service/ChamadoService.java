@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class ChamadoService {
 		this.serviceSLA = serviceSLA;
 	}
 	
+	@Transactional
 	public void adicionar(Chamado chamado) {
 		Calendar limite = Calendar.getInstance();
 		limite.add(Calendar.HOUR,chamado.getSla().getSLATempo());
@@ -37,6 +40,7 @@ public class ChamadoService {
 		daoChamado.adicionar(chamado);
 	}
 	
+	@Transactional
 	public void alterar(Chamado chamado) {
 		Calendar limite = Calendar.getInstance();
 		limite.add(Calendar.HOUR,chamado.getSla().getSLATempo());
@@ -62,6 +66,7 @@ public class ChamadoService {
 		daoChamado.alterar(chamado);
 	}
 	
+	@Transactional
 	public void remover(Chamado chamado) {
 		daoChamado.remover(chamado);
 	}

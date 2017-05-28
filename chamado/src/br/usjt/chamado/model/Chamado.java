@@ -22,8 +22,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name="chamado")
 @NamedQueries({ 
@@ -43,12 +41,10 @@ public class Chamado implements Serializable {
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "fila_id")
-	@JsonManagedReference	
 	private Fila fila;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "solicitante_id")
-	@JsonManagedReference	
 	private Usuario solicitante;
 	
 	@Temporal(value=TemporalType.TIMESTAMP)
@@ -90,7 +86,6 @@ public class Chamado implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "sla_id")
-	@JsonManagedReference
 	private SLA sla;
 
 	@Column(name = "ativo", length = 1, nullable = false)    
@@ -248,6 +243,13 @@ public class Chamado implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "Chamado [id=" + id + ", dtCadastro=" + dtCadastro + ", dtAlteracao=" + dtAlteracao + ", dtLimite="
+				+ dtLimite + ", dtInicioAtendimento=" + dtInicioAtendimento + ", dtFimAtendimento=" + dtFimAtendimento
+				+ ", assunto=" + assunto + ", descricao=" + descricao + ", solucao=" + solucao + ", ativo=" + ativo
+				+ "]";
 	}
 	
 	
