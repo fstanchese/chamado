@@ -64,4 +64,13 @@ public class RestChamado {
 		}
 		return new ResponseEntity<Chamado>(chamado,HttpStatus.CONFLICT);
 	}
+	
+	@RequestMapping(value="/rest/v1/chamado/atende", method = RequestMethod.PUT)
+	public ResponseEntity<Chamado> atendeChamado(@RequestBody Chamado chamado) {
+		if (chamado.getId() != null) {
+			serviceChamado.atender(chamado);
+			return new ResponseEntity<Chamado>(chamado,HttpStatus.OK);
+		}
+		return new ResponseEntity<Chamado>(chamado,HttpStatus.CONFLICT);
+	}
 }

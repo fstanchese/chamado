@@ -108,6 +108,7 @@ public class ChamadoService {
 		return lista;
 	}
 
+	@Transactional
 	public void atender(Chamado chamado) {
 		
 		Chamado chamadoOld = buscaPorId(chamado.getId());
