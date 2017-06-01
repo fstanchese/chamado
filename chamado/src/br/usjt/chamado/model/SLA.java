@@ -116,7 +116,7 @@ public class SLA implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SLA [id=" + id + ", descricao=" + descricao + ", SLATempo=" + slaTempo + "]";
+		return "SLA [id=" + id + ", descricao=" + descricao + ", SlaTempo=" + slaTempo + "]";
 	}
 	
 }
