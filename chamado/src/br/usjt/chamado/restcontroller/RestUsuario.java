@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usjt.chamado.dao.UsuarioDAO;
 import br.usjt.chamado.model.Usuario;
+import br.usjt.chamado.service.UsuarioService;
 
 @RestController
 public class RestUsuario {
 
-	private UsuarioDAO daoUsuario;
+	private UsuarioService serviceUsuario;
 
 	@Autowired
-	public RestUsuario(UsuarioDAO daoUsuario) {
-		this.daoUsuario = daoUsuario;
+	public RestUsuario(UsuarioService serviceUsuario) {
+		this.serviceUsuario = serviceUsuario;
 	}
 	
 	@RequestMapping(value="/rest/v1/usuarios",method = RequestMethod.GET)
 	public List<Usuario> listarTodos() {
-		List<Usuario> usuarios = daoUsuario.listar();
+		List<Usuario> usuarios = serviceUsuario.listar();
 		return usuarios;
 	}
 }

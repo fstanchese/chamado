@@ -40,7 +40,7 @@ public class SLA implements Serializable {
 	@NotEmpty(message = "Tempo em horas para o atendimento é obrigatório.")
 	@NotNull
 	@Column(name = "slatempo", length = 1, nullable = false)    
-	private Integer SLATempo;
+	private Integer slaTempo;
 
 	@NotNull
 	@Column(name = "prioridade", length = 2, nullable = false)    
@@ -73,12 +73,12 @@ public class SLA implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Integer getSLATempo() {
-		return SLATempo;
+	public Integer getSlaTempo() {
+		return slaTempo;
 	}
 
-	public void setSLATempo(Integer sLATempo) {
-		SLATempo = sLATempo;
+	public void setSlaTempo(Integer slaTempo) {
+		this.slaTempo = slaTempo;
 	}
 
 	public Integer getAtivo() {
@@ -116,7 +116,7 @@ public class SLA implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SLA [id=" + id + ", descricao=" + descricao + ", SLATempo=" + SLATempo + "]";
+		return "SLA [id=" + id + ", descricao=" + descricao + ", SLATempo=" + slaTempo + "]";
 	}
 	
 }

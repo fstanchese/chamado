@@ -83,7 +83,6 @@ public class Usuario implements Serializable {
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "sla_id")
-	@JsonIgnore
 	private SLA sla;
 
 	@Column(name = "ativo", length = 1, nullable = false)    
