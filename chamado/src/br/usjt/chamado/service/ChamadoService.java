@@ -31,7 +31,7 @@ public class ChamadoService {
 	@Transactional
 	public void adicionar(Chamado chamado) {
 		Calendar limite = Calendar.getInstance();
-		limite.add(Calendar.HOUR,chamado.getSla().getSLATempo());
+		limite.add(Calendar.HOUR,chamado.getSla().getSlaTempo());
 		chamado.setDtCadastro(new Date());
 		chamado.setDtLimite(limite.getTime());
 		chamado.setStatus(Status.ABERTO);
@@ -43,7 +43,7 @@ public class ChamadoService {
 	@Transactional
 	public void alterar(Chamado chamado) {
 		Calendar limite = Calendar.getInstance();
-		limite.add(Calendar.HOUR,chamado.getSla().getSLATempo());
+		limite.add(Calendar.HOUR,chamado.getSla().getSlaTempo());
 		
 		Chamado chamadolOld = buscaPorId(chamado.getId());
 		chamado.setDtCadastro(chamadolOld.getDtCadastro());

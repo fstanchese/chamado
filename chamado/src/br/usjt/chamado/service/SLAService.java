@@ -52,7 +52,7 @@ public class SLAService {
         long diferencaEmHours = ChronoUnit.HOURS.between(hoje, limite);
         long diferencaEmDias = ChronoUnit.DAYS.between(hoje, limite);	
         
-        if (diferencaEmHours%60  == 24) diferencaEmHours = 0;
+        if (diferencaEmHours%60 == 24) diferencaEmHours = 0;
         
         if (diferencaEmDias != 0) {
            dias = diferencaEmDias + " dia(s) ";
