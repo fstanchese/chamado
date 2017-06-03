@@ -63,6 +63,14 @@ public class SLAService {
         if (diferencaEmMinutos%60 != 0) {
            minutos = diferencaEmMinutos%60 + " minuto(s) ";
         }
+        if (diferencaEmHours%60 <= -24) {
+        	if (diferencaEmDias > 0) {
+                dias = ++diferencaEmDias + " dia(s) ";
+        	} else {
+                dias = --diferencaEmDias + " dia(s) ";
+        	}
+        	horas = (diferencaEmHours%60+24) + " hora(s) ";
+        }
         return dias + horas + minutos;
 	}
 	
