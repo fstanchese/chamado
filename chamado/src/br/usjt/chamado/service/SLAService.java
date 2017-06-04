@@ -63,13 +63,14 @@ public class SLAService {
         if (diferencaEmMinutos%60 != 0) {
            minutos = diferencaEmMinutos%60 + " minuto(s) ";
         }
+    	System.out.println("horas" +diferencaEmHours%60);
         if (diferencaEmHours%60 <= -24) {
-        	if (diferencaEmDias > 0) {
-                dias = ++diferencaEmDias + " dia(s) ";
+        	if ((diferencaEmHours%60+24) != 0) {
+            	System.out.println(dtLimite+"horas" +diferencaEmHours%60);
+            	horas = (diferencaEmHours%60+24) + " hora(s) ";       		
         	} else {
-                dias = --diferencaEmDias + " dia(s) ";
+        		horas = "";
         	}
-        	horas = (diferencaEmHours%60+24) + " hora(s) ";
         }
         return dias + horas + minutos;
 	}
