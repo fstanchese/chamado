@@ -74,14 +74,16 @@ public class ChamadoService {
 	public Chamado buscaPorId(Long id) {
         LocalDateTime hoje;
         Date dataInicio;
+        String prazo;
+        
         Chamado chamado = daoChamado.buscaPorId(id);
 		hoje = LocalDateTime.now();
 		dataInicio = chamado.getDtLimite();
 		if (chamado.getStatus().equals(Status.FECHADO)) {
-			hoje = chamado.getDtInicioAtendimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-			dataInicio = chamado.getDtInicioAtendimento();				
+			prazo = "FINALIZADO";
+		} else {
+			prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
 		}
-		String prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
 		chamado.setPrazo(prazo);
 		return chamado;
 	}
@@ -90,18 +92,22 @@ public class ChamadoService {
 	public List<Chamado> listarSolucionador(Usuario solicitante, String status) {
         LocalDateTime hoje;
         Date dataInicio;
+        String prazo;
         
 		List<Chamado> lista = daoChamado.listarSolucionador(solicitante,status);
 		if (lista != null) {
 			for (Chamado chamado : lista) {
 				hoje = LocalDateTime.now();
 				dataInicio = chamado.getDtLimite();
-				if (chamado.getStatus().equals(Status.ABERTO) || chamado.getStatus().equals(Status.ATRASADO )) {
-					String prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
-					chamado.setPrazo(prazo);
-				}
 				if (serviceSLA.estaAtrasado(chamado.getDtLimite()) && chamado.getStatus().equals(Status.ABERTO)) {
 				  chamado.setStatus(Status.ATRASADO);
+				}
+				if (chamado.getStatus().equals(Status.ABERTO) || chamado.getStatus().equals(Status.ATRASADO )) {
+					prazo = serviceSLA.calculaPrazo(dataInicio,hoje);
+					chamado.setPrazo(prazo);
+				}
+				if (chamado.getStatus().equals(Status.FECHADO)) {
+					chamado.setPrazo("FINALIZADO");
 				}
 			}
 		}
