@@ -38,7 +38,7 @@ body{
      		<div class="panel panel-primary">
    				<div class="panel-heading">
    					<c:if test="${not empty chamado.id}">
-	   					<strong>Alterar Chamado</strong>
+	   					<strong>Alterar Chamado #${chamado.id}</strong>
 					</c:if>
    					<c:if test="${empty chamado.id}">
 	   					<strong>Novo Chamado</strong>

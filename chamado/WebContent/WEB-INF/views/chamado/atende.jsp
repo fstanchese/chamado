@@ -37,7 +37,7 @@ body{
 		<div class="panel panel-group">
      		<div class="panel panel-primary">
    				<div class="panel-heading">
-	   					<strong>Atender Chamado</strong>
+	   					<strong>Atender Chamado #${chamado.id}</strong>
    				</div>
    			</div>
 			<div class="panel-body">

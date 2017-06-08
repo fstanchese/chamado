@@ -60,6 +60,7 @@ body{
 				<table class="table table-hover table-condensed table-striped table-bordered">
 				<thead>
 					<tr>
+						<th align=center>#</th>
 						<th align=center>Solicitante</th>
 						<th align=center>Fila</th>
 						<th align=center>Inicio Prazo</th>
@@ -78,6 +79,7 @@ body{
 				<tbody>
 					<c:forEach var="chamado" items="${chamados}">
 						<tr>
+							<td nowrap>&nbsp;${chamado.id}</td>
 							<td nowrap>&nbsp;${chamado.solicitante.nome}</td>
 							<td nowrap>&nbsp;${chamado.fila.descricao}</td>
 							<c:if test="${empty chamado.dtAlteracao}">
