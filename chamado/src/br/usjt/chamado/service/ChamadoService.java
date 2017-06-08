@@ -1,7 +1,6 @@
 package br.usjt.chamado.service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -71,6 +70,7 @@ public class ChamadoService {
 		daoChamado.remover(chamado);
 	}
 	
+	@Transactional
 	public Chamado buscaPorId(Long id) {
         LocalDateTime hoje;
         Date dataInicio;
@@ -89,6 +89,7 @@ public class ChamadoService {
 	}
 	
 
+	@Transactional
 	public List<Chamado> listarSolucionador(Usuario solicitante, String status) {
         LocalDateTime hoje;
         Date dataInicio;
